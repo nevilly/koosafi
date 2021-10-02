@@ -10,25 +10,12 @@ void main() {
   runApp(MyApp());
 }
 
-//Future method to hit API
-// Future<List<Users>> fetchUsers() async {
-//   final response = await http
-//       .post(Uri.parse('https://appmwansa.000webhostapp.com/index.php'));
-//   print('check me heree...' + response.body);
-//   if (response.statusCode == 200) {
-//     return Users.fromJson(jsonDecode(response.body));
-//   } else {
-//     //return error
-//     print('check me heree... Not');
-//     throw Exception('Failed to load album');
-//   }
-
 Future<List<Users>> fetchUsers() async {
   final response = await http
       .post(Uri.parse('https://appmwansa.000webhostapp.com/index.php'));
   print('check me heree...' + response.body);
   if (response.statusCode == 200) {
-    List jsonResponse = json.decode(response.body);
+    List<dynamic> jsonResponse = json.decode(response.body);
 
     return jsonResponse.map((data) => new Users.fromJson(data)).toList();
   } else {
@@ -36,14 +23,6 @@ Future<List<Users>> fetchUsers() async {
     print('check me heree... Not');
     throw Exception('Failed to load album');
   }
-
-  // var url = ('https://appmwansa.000webhostapp.com/index.php');
-  // http.Response response = await http
-  //     .get(Uri.parse('https://appmwansa.000webhostapp.com/index.php'));
-  // var data = jsonDecode(response.body);
-  // print(data.toString());
-
-  // return data;
 }
 
 class MyApp extends StatelessWidget {
